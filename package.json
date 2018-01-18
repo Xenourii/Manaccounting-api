@@ -1,0 +1,31 @@
+{
+  "name": "gescompta",
+  "version": "1.0.0",
+  "description": "Api for the Manaccounting app",
+  "main": "app.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajalabert/Manaccounting-api.git"
+  },
+  "author": "Adrien Jalabert",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajalabert/Manaccounting-api/issues"
+  },
+  "homepage": "https://github.com/ajalabert/Manaccounting-api#readme",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
+    "lodash": "^4.17.4",
+    "mongoose": "^4.13.9",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1",
+    "request": "^2.83.0"
+  }
+}
