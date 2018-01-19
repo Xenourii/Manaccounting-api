@@ -14,7 +14,7 @@ var userSchema = new Schema({
     birth_date: {type: Date, required: true },
     password: { type: String, required: true },
     address: {type: String, required: true },
-    gameList: Array,
+    orders: Array,
     created_at: { type: Date, default: Date.now },
     isActivated: { type: Boolean, default: true }
 });
