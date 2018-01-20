@@ -20,7 +20,7 @@ router.get("/all", passport.authenticate('jwt', {session: false}), function(req,
         if(products){
             res.status(200).json(products);
         }
-        else{
+        else {
             res.status(404).json(err);
         }
     });
