@@ -10,7 +10,7 @@ var productSchema = new Schema({
     brand: { type: String, required: true},
     memory: { type: String, required: true},
     refresh_rate: { type: String, required: true},
-    battery_life: { type: Stream, required: true},
+    battery_life: { type: String, required: true},
     OS: { type: String, required: true},
     interface: { type: String, required: true},
     guarantee: { type: Number, required: true},
