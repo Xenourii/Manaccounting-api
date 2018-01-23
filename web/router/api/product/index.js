@@ -15,17 +15,6 @@ router.get("/:Id", passport.authenticate('jwt', { session: false }), function(re
     });
 });
 
-router.get("/all", passport.authenticate('jwt', {session: false}), function(req, res){
-    Product.find({ isActivated: true}, function(err, products){
-        if(products){
-            res.status(200).json(products);
-        }
-        else {
-            res.status(404).json(err);
-        }
-    });
-});
-
 //TODO: Only post, patch and delete with admin auth.
 router.post("/", passport.authenticate('jwt', {session: false}), function(req, res){
 
@@ -38,14 +27,14 @@ router.post("/", passport.authenticate('jwt', {session: false}), function(req, r
     product.brand = req.body.Brand;
     product.memory = req.body.Memory;
     product.refresh_rate = req.body.RefreshRate;
+    product.battery_life = req.body.BatteryLife;
     product.OS = req.body.Os;
     product.interface = req.body.Interface;
     product.guarantee = req.body.Guarantee;
     product.contact_mail = req.body.ContactMail;
     product.return_address = req.body.ReturnAddress;
-    product.isActivated = req.body.IsActivated;
 
-    product.save((err, res) => {
+    product.save((err) => {
         if(err)
             res.status(500).json(err);
         res.status(200).json({message: "added!"});
@@ -66,6 +55,7 @@ router.patch("/:Id", passport.authenticate('jwt', {session: false}), function(re
         product.brand = req.body.Brand || product.brand;
         product.memory = req.body.Memory || product.memory;
         product.refresh_rate = req.body.RefreshRate || product.refresh_rate;
+        product.battery_life = req.body.BatteryLife || product.battery_life;
         product.OS = req.body.Os || product.OS;
         product.interface = req.body.Interface || product.interface;
         product.guarantee = req.body.Guarantee || product.guarantee;
@@ -73,7 +63,7 @@ router.patch("/:Id", passport.authenticate('jwt', {session: false}), function(re
         product.return_address = req.body.ReturnAddress || product.return_address;
         product.isActivated = req.body.IsActivated || product.isActivated;
 
-        product.save((err, res) => {
+        product.save((err) => {
             if(err)
                 res.status(500).json(err);
             res.status(200).json({message: "updated!"});
@@ -88,7 +78,7 @@ router.delete("/:Id", passport.authenticate('jwt', {session: false}), function(r
     
     Product.findOne({ id: id, isActivated: true}, function(err, product){
         if(!product)
-            res.status(401).json(err); //Check status code
+            res.status(401).json(err); //TODO: Check if that status code is OK with that context
         
         Product.findByIdAndUpdate({_id: product._id}, {isActivated: false}, function(err, res){
             if(err)
