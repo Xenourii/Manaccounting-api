@@ -32,13 +32,13 @@ passport.use(strategy);
 router.use(passport.initialize());
 
 router.post("/", function(req, res) {
-    if(typeof req.body.email == 'undefined' || typeof req.body.password == 'undefined'){
+    if(typeof req.body.Email == 'undefined' || typeof req.body.Password == 'undefined'){
         res.status(400).json({message:"bad request"});
         return;
     }
 
-    var email = req.body.email;
-    var password = req.body.password;
+    var email = req.body.Email;
+    var password = req.body.Password;
 
     User.findOne({ email: email }, function(err, user) {
         if (! user ) {
@@ -46,7 +46,7 @@ router.post("/", function(req, res) {
             return;
         }
 
-        if (bcrypt.compareSync(req.body.password, user.password)) {
+        if (bcrypt.compareSync(password, user.password)) {
             if (user.isActivated) {
                 var payload = {id: user.id};
                 var token = jwt.sign(payload, jwtOptions.secretOrKey);
