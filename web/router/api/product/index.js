@@ -26,6 +26,32 @@ router.get("/all", passport.authenticate('jwt', {session: false}), function(req,
     });
 });
 
+//TODO: Only post, patch and delete with admin auth.
+router.post("/", passport.authenticate('jwt'), {session: false}, function(req, res){
+
+    var product = new Product();
+    product.id = req.body.Id;
+    product.name = req.body.Name;
+    product.price = req.body.Price;
+    product.description = req.body.Description;
+    product.category = req.body.Category;
+    product.brand = req.body.Brand;
+    product.memory = req.body.Memory;
+    product.refresh_rate = req.body.RefreshRate;
+    product.OS = req.body.Os;
+    product.interface = req.body.Interface;
+    product.guarantee = req.body.Guarantee;
+    product.contact_mail = req.body.ContactMail;
+    product.return_address = req.body.ReturnAddress;
+    product.isActivated = req.body.IsActivated;
+
+    product.save((err, res) => {
+        if(err)
+            res.status(500).json(err);
+        res.status(200).json({message: "added!"});
+    });
+});
+
 router.patch("/:Id", passport.authenticate('jwt'), {session: false}, function(req, res){
 
     Product.find({ id: id, isActivated: true}, function(err, product){
