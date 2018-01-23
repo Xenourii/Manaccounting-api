@@ -27,7 +27,7 @@ router.get("/all", passport.authenticate('jwt', {session: false}), function(req,
 });
 
 //TODO: Only post, patch and delete with admin auth.
-router.post("/", passport.authenticate('jwt'), {session: false}, function(req, res){
+router.post("/", passport.authenticate('jwt', {session: false}), function(req, res){
 
     var product = new Product();
     product.id = req.body.Id;
@@ -52,7 +52,7 @@ router.post("/", passport.authenticate('jwt'), {session: false}, function(req, r
     });
 });
 
-router.patch("/:Id", passport.authenticate('jwt'), {session: false}, function(req, res){
+router.patch("/:Id", passport.authenticate('jwt', {session: false}), function(req, res){
 
     Product.find({ id: id, isActivated: true}, function(err, product){
         if(!product)
