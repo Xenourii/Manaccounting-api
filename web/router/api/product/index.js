@@ -10,7 +10,7 @@ router.get("/:Id", passport.authenticate('jwt', { session: false }), function(re
             res.status(200).json(product);
         }
         else {
-            res.status(404).json(err);
+            res.status(500).json(err);
         }
     });
 });

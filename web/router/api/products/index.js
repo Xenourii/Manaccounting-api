@@ -8,7 +8,7 @@ router.get("/", passport.authenticate('jwt', {session: false}), function(req, re
             res.status(200).json(products);
         }
         else {
-            res.status(404).json(err);
+            res.status(500).json(err);
         }
     });
 });

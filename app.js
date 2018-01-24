@@ -7,6 +7,7 @@ var http = require('http');
 
 app.use(bodyParser.json());
 app.use("/", require("./web/index.js"));
+app.use("/Public", express.static(path.join(__dirname, 'Public')));
 
 var port = process.env.PORT || 3000;
 
